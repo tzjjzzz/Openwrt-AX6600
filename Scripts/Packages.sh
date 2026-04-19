@@ -78,6 +78,23 @@ UPDATE_PACKAGE "ddns-go" "sirpdboy/luci-app-ddns-go" "main"
 UPDATE_PACKAGE "viking" "ones20250/packages" "main" "" "luci-app-timewol luci-app-wolplus"
 #UPDATE_PACKAGE "vnt" "lmq8267/luci-app-vnt" "main"
 
+echo "Adding bandix backend (openwrt-bandix)..."
+rm -rf bandix openwrt-bandix 2>/dev/null || true
+git clone --depth=1 --single-branch --branch main https://github.com/timsaya/openwrt-bandix.git /tmp/openwrt-bandix
+mkdir -p bandix
+cp -rf /tmp/openwrt-bandix/openwrt-bandix/* bandix/ 2>/dev/null || true
+rm -rf /tmp/openwrt-bandix
+echo "✅ bandix (backend) added successfully! (Makefile is now at bandix/Makefile)"
+
+# ====================== Bandix 前端 (LuCI) ======================
+echo "Adding luci-app-bandix..."
+rm -rf luci-app-bandix 2>/dev/null || true
+git clone --depth=1 --single-branch --branch main https://github.com/timsaya/luci-app-bandix.git /tmp/luci-app-bandix
+mkdir -p luci-app-bandix
+cp -rf /tmp/luci-app-bandix/luci-app-bandix/* luci-app-bandix/ 2>/dev/null || true
+rm -rf /tmp/luci-app-bandix
+echo "✅ luci-app-bandix (frontend) added successfully! (Makefile is now at luci-app-bandix/Makefile)"
+
 #更新软件包版本
 UPDATE_VERSION() {
 	local PKG_NAME=$1
