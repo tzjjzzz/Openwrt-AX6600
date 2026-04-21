@@ -148,7 +148,8 @@ jobs:
       - name: Update Feeds
         run: |
           cd ./wrt/
-
+          # 先添加 Nikki 的 feed 源
+          echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           # 额外强制安装缺失的 python 依赖
