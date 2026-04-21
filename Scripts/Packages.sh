@@ -95,6 +95,9 @@ cp -rf /tmp/luci-app-bandix/luci-app-bandix/* luci-app-bandix/ 2>/dev/null || tr
 rm -rf /tmp/luci-app-bandix
 echo "✅ luci-app-bandix (frontend) added successfully! (Makefile is now at luci-app-bandix/Makefile)"
 
+
+UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main"
+
 #更新软件包版本
 UPDATE_VERSION() {
 	local PKG_NAME=$1
