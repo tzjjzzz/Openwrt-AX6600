@@ -79,6 +79,8 @@ UPDATE_PACKAGE "ddns-go" "sirpdboy/luci-app-ddns-go" "main"
 UPDATE_PACKAGE "viking" "ones20250/packages" "main" "" "luci-app-timewol luci-app-wolplus"
 #UPDATE_PACKAGE "vnt" "lmq8267/luci-app-vnt" "main"
 
+# 将 Nikki 作为 Feed 源注册到 OpenWrt 构建系统
+echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> feeds.conf.default
 echo "Adding bandix backend (openwrt-bandix)..."
 rm -rf bandix openwrt-bandix 2>/dev/null || true
 git clone --depth=1 --single-branch --branch main https://github.com/timsaya/openwrt-bandix.git /tmp/openwrt-bandix
