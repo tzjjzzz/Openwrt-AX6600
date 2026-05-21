@@ -98,7 +98,22 @@ cp -rf /tmp/luci-app-bandix/luci-app-bandix/* luci-app-bandix/ 2>/dev/null || tr
 rm -rf /tmp/luci-app-bandix
 echo "✅ luci-app-bandix (frontend) added successfully! (Makefile is now at luci-app-bandix/Makefile)"
 
+echo "Adding bandix-plus backend (openwrt-bandix-plus)..."
+rm -rf bandix-plus openwrt-bandix-plus 2>/dev/null || true
+git clone --depth=1 --single-branch --branch main https://github.com/timsaya/openwrt-bandix-plus.git /tmp/openwrt-bandix-plus
+mkdir -p bandix-plus
+cp -rf /tmp/openwrt-bandix-plus/openwrt-bandix-plus/* bandix-plus/ 2>/dev/null || true
+rm -rf /tmp/openwrt-bandix-plus
+echo "✅ bandix-plus (backend) added successfully! (Makefile is now at bandix-plus/Makefile)"
 
+# ====================== bandix-plus 前端 (LuCI) ======================
+echo "Adding luci-app-bandix-plus..."
+rm -rf luci-app-bandix-plus 2>/dev/null || true
+git clone --depth=1 --single-branch --branch main https://github.com/timsaya/luci-app-bandix-plus.git /tmp/luci-app-bandix-plus
+mkdir -p luci-app-bandix-plus
+cp -rf /tmp/luci-app-bandix-plus/luci-app-bandix-plus/* luci-app-bandix-plus/ 2>/dev/null || true
+rm -rf /tmp/luci-app-bandix-plus
+echo "✅ luci-app-bandix-plus (frontend) added successfully! (Makefile is now at luci-app-bandix-plus/Makefile)"
 
 
 #更新软件包版本
