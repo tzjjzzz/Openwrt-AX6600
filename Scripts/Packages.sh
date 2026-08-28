@@ -73,6 +73,20 @@ if [[ "${WRT_PROFILE^^}" == "PLUS" ]]; then
 	UPDATE_PACKAGE "viking" "ones20250/packages" "main" "" "luci-app-timewol luci-app-wolplus"
 	UPDATE_PACKAGE "ddns-go" "sirpdboy/luci-app-ddns-go" "main"
 	UPDATE_PACKAGE "luci-app-pushbot" "zzsj0928/luci-app-pushbot" "master"
+
+
+	# ====================== openwrt-bandix ======================
+echo "Adding openwrt-bandix..."
+rm -rf openwrt-bandix 2>/dev/null || true
+git clone --depth=1 --single-branch --branch main https://github.com/timsaya/openwrt-bandix.git /tmp/openwrt-bandix
+mkdir -p openwrt-bandix
+cp -rf /tmp/openwrt-bandix/openwrt-bandix/* openwrt-bandix/ 2>/dev/null || true
+rm -rf /tmp/openwrt-bandix
+echo "✅ openwrt-bandix (frontend) added successfully! (Makefile is now at openwrt-bandix/Makefile)"
+
+
+
+	
 	# ====================== Bandix 前端 (LuCI) ======================
 echo "Adding luci-app-bandix..."
 rm -rf luci-app-bandix 2>/dev/null || true
@@ -81,6 +95,11 @@ mkdir -p luci-app-bandix
 cp -rf /tmp/luci-app-bandix/luci-app-bandix/* luci-app-bandix/ 2>/dev/null || true
 rm -rf /tmp/luci-app-bandix
 echo "✅ luci-app-bandix (frontend) added successfully! (Makefile is now at luci-app-bandix/Makefile)"
+
+
+
+
+
 
 echo "Adding bandix-plus backend (openwrt-bandix-plus)..."
 rm -rf bandix-plus openwrt-bandix-plus 2>/dev/null || true
