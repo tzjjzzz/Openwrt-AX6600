@@ -4,6 +4,7 @@
 #流量监控 推送消息
 CONFIG_PACKAGE_fail2ban=y
 CONFIG_PACKAGE_luci-app-wechatpush=y
+CONFIG_PACKAGE_luci-app-pushbot=y
 CONFIG_PACKAGE_bandix=y
 CONFIG_PACKAGE_luci-app-bandix=y
 CONFIG_PACKAGE_bandix-plus=y
