@@ -67,10 +67,36 @@ if [[ "${WRT_PROFILE^^}" == "PLUS" ]]; then
 	UPDATE_PACKAGE "openclash" "vernesong/OpenClash" "master" "pkg"
 	#一代 PassWall 已由 PassWall2 取代，fork 者如需可取消注释，并同步启用 Config/GENERAL_AX6600_PLUS.txt 中对应配置段
 	#UPDATE_PACKAGE "passwall" "Openwrt-Passwall/openwrt-passwall" "main" "pkg"
-	UPDATE_PACKAGE "passwall2" "Openwrt-Passwall/openwrt-passwall2" "main" "pkg"
+	#UPDATE_PACKAGE "passwall2" "Openwrt-Passwall/openwrt-passwall2" "main" "pkg"
 	# 分区扩容与网络唤醒：源码仅 PLUS 版拉取，PURE 中同名 =y 配置因无源码自动失效
 	UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
 	UPDATE_PACKAGE "viking" "ones20250/packages" "main" "" "luci-app-timewol luci-app-wolplus"
+	UPDATE_PACKAGE "ddns-go" "sirpdboy/luci-app-ddns-go" "main"
+	# ====================== Bandix 前端 (LuCI) ======================
+echo "Adding luci-app-bandix..."
+rm -rf luci-app-bandix 2>/dev/null || true
+git clone --depth=1 --single-branch --branch main https://github.com/timsaya/luci-app-bandix.git /tmp/luci-app-bandix
+mkdir -p luci-app-bandix
+cp -rf /tmp/luci-app-bandix/luci-app-bandix/* luci-app-bandix/ 2>/dev/null || true
+rm -rf /tmp/luci-app-bandix
+echo "✅ luci-app-bandix (frontend) added successfully! (Makefile is now at luci-app-bandix/Makefile)"
+
+echo "Adding bandix-plus backend (openwrt-bandix-plus)..."
+rm -rf bandix-plus openwrt-bandix-plus 2>/dev/null || true
+git clone --depth=1 --single-branch --branch main https://github.com/timsaya/openwrt-bandix-plus.git /tmp/openwrt-bandix-plus
+mkdir -p bandix-plus
+cp -rf /tmp/openwrt-bandix-plus/openwrt-bandix-plus/* bandix-plus/ 2>/dev/null || true
+rm -rf /tmp/openwrt-bandix-plus
+echo "✅ bandix-plus (backend) added successfully! (Makefile is now at bandix-plus/Makefile)"
+
+# ====================== bandix-plus 前端 (LuCI) ======================
+echo "Adding luci-app-bandix-plus..."
+rm -rf luci-app-bandix-plus 2>/dev/null || true
+git clone --depth=1 --single-branch --branch main https://github.com/timsaya/luci-app-bandix-plus.git /tmp/luci-app-bandix-plus
+mkdir -p luci-app-bandix-plus
+cp -rf /tmp/luci-app-bandix-plus/luci-app-bandix-plus/* luci-app-bandix-plus/ 2>/dev/null || true
+rm -rf /tmp/luci-app-bandix-plus
+echo "✅ luci-app-bandix-plus (frontend) added successfully! (Makefile is now at luci-app-bandix-plus/Makefile)"
 fi
 
 #UPDATE_PACKAGE "mosdns" "sbwml/luci-app-mosdns" "v5" "" "v2dat"
